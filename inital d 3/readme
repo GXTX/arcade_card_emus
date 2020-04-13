@@ -1,0 +1,45 @@
+Here's version 1.0 of ID3CARDEMU.
+
+Use at your own risk. I have described in this thread the wiring that worked for me and the serial adapter I used. I can't say for sure that it would work with any other adapters or built-in serial ports on laptops without some kind of accommodation for voltage level differences.
+
+I have only tried it on a Windows 10 and Windows 7 laptop with a TU-S9 adapter.
+
+Any of you who are experts at programming will probably laugh at it. Things were probably handled very inefficiently, but it works. :D
+
+Feel free to modify and redistribute without my permission. Please share any improvements with everyone, though.
+
+At this point, I believe the only thing that's untested is what happens at 50 read/write cycles and the inspection period comes up. I'm not that motivated at the moment to try for that.
+
+I don't know if it handles starting a new game and not purchasing a card. That's not something I tested, so it may end up giving a card r/w error if you tried that. If you get a card r/w error, just go into the service menu and exit to restart the game. The script should also probably be restarted when the game is to make sure variables are initialized as needed (though in retrospect, all variables probably should just be getting initialized when the initialize command comes in...)
+
+It's programmed in Python 3, and I don't think is compatible with other Python versions.
+
+Operation is as follows:
+ID3CARDEMU.py -cp COM6 -f NEWCARD1.HEX
+
+With -cp you're just specifying the port, no other info. Everything else defaults to what it should be.
+
+With -f you're specifying the card file name.
+
+If you want to make a new card, just specify a file name that doesn't exist and it will create the card and only allow you to start a new game. If you specify a card file that contains data, it will automatically insert it after you push start.
+
+You have to restart the script to change cards. It should be possible to restart the script during game over mode, but do it quickly as sometimes there is random communication between the game and the reader, and it will give an error if it doesn't get a response back in time.
+
+I haven't done much long-term testing, so not sure if random commands come back at points in the game and I have no response for them.
+
+I only tested it with ID3, so not sure how compatible it is with ID1 and 2. It's likely not compatible with other card r/w games, as I briefly tried it with WMMT and it gave slightly different commands than this script was expecting. 
+
+NAOMI 2 CN8 header to 9-pin d-sub serial adapter:
+Pin 1: RXD to Pin 3: TXD
+Pin 2: TXD to Pin 2: RXD
+Pin 3: GND to Pin 5: GND
+Pin 4: RTS to Pin 8: CTS (This may actually not be needed)
+Pin 5: CTS to Pin 7: RTS
+
+The serial adapter I have is:
+TRENDnet TU-S9 USB to Serial Converter
+
+The header at NAOMI 2 CN8 needs a 6 pin .100" connector/pins. I happened to have this size connector housing and crimp pins on hand for when I work on my pinball machines.
+
+I haven't wired up an adapter straight from the NAOMI to serial port yet, but that will just be a matter of wiring into a female d-sub. 
+

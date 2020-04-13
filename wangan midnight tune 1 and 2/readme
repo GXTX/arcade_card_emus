@@ -1,0 +1,26 @@
+Here's the release of WMMTCARDEMU. Use at your own risk. Feel free to modify and redistribute without my permission, but please share any changes.
+
+The script was programmed in Python3 and requires Pyserial.
+
+An example of the command to run it:
+WMMTCARDEMU.py -cp COM3 -f WMMT1FILE1.hex
+
+Specify a filename for your card file. If the file doesn't exist or is blank, a new card must be purchased when starting the game. If the file has data it will be automatically loaded at the point the game asks if you have a card.
+
+You can restart the script and load different card data in game over mode.
+
+It should work with WMMT 1 and 2. I didn't try card data from 1 loaded into 2, but the opposite surely wouldn't work. I doubt the emulator will handle improper data loading correctly, so be sure to load up card data for the correct game. At worst I think you'll get an error message in the game where you'll have to go to the test menu to reboot the game, at which point you can stop and reload the script with proper data.
+
+WMMT seems to keep track of cleaning the card reader unit, so if you keep this game loaded up in the Chihiro and ever boot the game and it gives an error message indicating that you need to clean the unit, go into the game test menu and run the cleaning step under the card reader section.
+
+In the Card Reader test menu I didn't test any of the steps other than Cleaning and Initialization, so I can't say whether or not it would succeed through the other tests, so it's probably best not to mess with them.
+
+Wiring:
+CN5 is an 8-pin header on the Chihiro and drives both the NAMCO FFB unit and the card reader/writer unit, so keep that in mind if you ever try to wire up one of the FFB units as well. Normally the FFB would use the ground at Pin 3 while card r/w uses ground a Pin 8. However if you're just wiring in for the card emulator, you can use a 3 position housing and connect sequential pins 3-5.
+CN5 on Chihiro to Female 9-pin D-sub that connects to USB Serial Adapter (TU-S9):
+Pin 3 [or 8] (GND) - Pin 5 (GND)
+Pin 4 (TXD) - Pin 2 (RXD)
+Pin 5 (RXD) - Pin 3 (TXD)
+
+Note that this emulator and wiring may also work for Mario Kart Arcade GP 1/2. If anyone wants to try, I'll be curious to know if it works. At worst it may be necessary to retool how the emulator stores and gives back card data. I'm not sure what the name of the header on the Triforce is, but it looks like the pinout would be the same. 
+

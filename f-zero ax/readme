@@ -1,0 +1,10 @@
+Here's the script for F-ZERO AX.
+
+Wiring:
+J3 on Triforce to Female 9-pin D-sub that connects to USB Serial Adapter (TU-S9):
+Pin 3 [or 8] (GND) - Pin 5 (GND)
+Pin 4 (TXD) - Pin 2 (RXD)
+Pin 5 (RXD) - Pin 3 (TXD)
+Pin 6 (RTS) - Pin 8 (CTS)
+Pin 7 (CTS) - Pin 7 (RTS) 
+
